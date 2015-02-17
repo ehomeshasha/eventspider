@@ -13,7 +13,7 @@ BOT_NAME = 'eventspider'
 
 SPIDER_MODULES = ['eventspider.spiders']
 NEWSPIDER_MODULE = 'eventspider.spiders'
-ITEM_PIPELINES = ['eventspider.pipelines.EventPipeline']
+ITEM_PIPELINES = {'eventspider.pipelines.EventPipeline':0}
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'crawler (+http://www.yourdomain.com)'
 

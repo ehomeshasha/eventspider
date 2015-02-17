@@ -3,7 +3,7 @@ from __future__ import division
 import os
 import math
 from scrapy.selector import HtmlXPathSelector
-from crawler.items import EventBriteItem
+from eventspider.items import EventBriteItem
 from scrapy.spider import Spider
 from scrapy.http.request import Request
 from scrapy.conf import settings
@@ -37,21 +37,20 @@ class EventBriteSpider(Spider):
         for n in range(1, page_number + 1):
             url = response.url+"&page=%d" % n
             yield Request(url, callback=self.extract_url)
-            break
+            #break
 
 
 
     def extract_url(self, response):
         ret = json.loads(response.body)
         events = ret['events'][1:]
-        items = {}
         for e in events:
             item = EventBriteItem()
-            item['event'] = json.dumps(e)
-            item['id'] = e['id']
-
-        pass
-
+            event = json.dumps(e['event'])
+            item['event'] = event
+            item['id'] = e['event']['id']
+            self.db.eventbrite.update({"id":item['id']},{"$set":e['event']}, upsert=True)
+            yield item
 
 
 
@@ -59,4 +58,5 @@ class EventBriteSpider(Spider):
 
 
     def __init__(self, name=None, **kwargs):
+        self.db = settings.get('MONGO_DB')
         super(EventBriteSpider, self).__init__(name, **kwargs)

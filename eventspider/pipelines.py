@@ -33,9 +33,7 @@ class EventPipeline(object):
 
 
         elif spider.name == "eventbrite":
-
-            res = db.events.update({"id":item['id']},{"$set":
-            item['event']}, upsert=True)
+            #res = db.events.update({"id":item['id']},{"$set":item['event']}, upsert=True)
 
 
             pass

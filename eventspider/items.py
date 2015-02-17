@@ -31,4 +31,4 @@ class EventItem(scrapy.Item):
 
 class EventBriteItem(scrapy.Item):
     id = scrapy.Field()
-    event = scrapy.Field
+    event = scrapy.Field()

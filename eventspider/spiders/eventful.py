@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from scrapy.contrib.spiders import XMLFeedSpider
 from scrapy.http.request import Request
-from crawler.items import EventItem
+from eventspider.items import EventItem
 import re
 
 class EventfulSpider(XMLFeedSpider):
