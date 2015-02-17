@@ -47,10 +47,10 @@ class EventBriteSpider(Spider):
         for e in events:
             item = EventBriteItem()
             event = json.dumps(e['event'])
-            item['event'] = event
-            item['id'] = e['event']['id']
-            self.db.eventbrite.update({"id":item['id']},{"$set":e['event']}, upsert=True)
-            yield item
+            #item['event'] = event
+            #item['id'] = e['event']['id']
+            self.db.eventbrite.update({"id":e['event']['id']},{"$set":e['event']}, upsert=True)
+            #yield item
 
 
 
